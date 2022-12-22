@@ -38,6 +38,7 @@ Resources:
 
   # Amazon API gateway REST API
   MyApi:
+    name: sam-waf-203
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
@@ -46,9 +47,10 @@ Resources:
 
   # Associate the WebACL with the API gateway
   MyWAFAssociation:
+    name: sam-waf-203
     Type: AWS::WAFv2::WebACLAssociation
     Properties:
-      ResourceArn: !Sub arn:aws:apigateway:${AWS::Region}::/restapis/${MyWAFACL}/stages/Prod
+      ResourceArn: !Sub arn:aws:apigateway:${AWS::Region}::/restapis/${MyApi}/stages/Prod
       WebACLArn: !GetAtt MyWAFACL.Arn
 
 # Lambda function as an example micro-service behind the API Gateway REST endpoint
